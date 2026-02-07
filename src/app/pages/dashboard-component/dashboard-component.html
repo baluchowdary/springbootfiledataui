@@ -36,7 +36,7 @@
             <tbody>
               @for (data of paginatedUsers(); track data.id) {
               <tr class="align-middle">
-                <td class="ps-4 fw-medium text-primary">#{{ data.id }}</td>
+                <td class="ps-4 fw-medium text-primary">{{ data.id }}</td>
                 <td class="fw-bold text-dark">{{ data.name }}</td>
                 <td>
                   <span class="badge border border-danger-subtle text-danger bg-danger-subtle px-2 py-1 font-monospace">

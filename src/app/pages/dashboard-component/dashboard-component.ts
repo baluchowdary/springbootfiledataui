@@ -41,7 +41,13 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  constructor(private service: DashboardService) { }
+  constructor(private service: DashboardService) {
+    //refresh data every 5 seconds - we have to use below time interval approch, when our reequirement is less records and latest live datata 
+    setInterval(() => {
+      this.getFileData();
+    }, 5000);
+
+   }
 
 
   ngOnInit(): void {
