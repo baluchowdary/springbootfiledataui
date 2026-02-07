@@ -1,0 +1,79 @@
+<div class="container-fluid min-vh-100 py-5" style="background-color: #f8f9fa;">
+  <div class="container">
+    <div class="card shadow border-0" style="border-top: 5px solid #0d6efd !important;">
+
+      <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 fw-bold text-dark">File Data</h4>
+        <span class="badge bg-primary">Page {{ currentPage() }} of {{ totalPages() }}</span>
+
+        <div class="btn-group">
+          <button class="btn btn-outline-primary btn-sm" [disabled]="currentPage() === 1"
+            (click)="goToPage(currentPage() - 1)">
+            Previous
+          </button>
+
+          <button class="btn btn-outline-primary btn-sm" [disabled]="currentPage() === totalPages()"
+            (click)="goToPage(currentPage() + 1)">
+            Next
+          </button>
+        </div>
+
+      </div>
+
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead style="background-color: #f1f4f9;">
+              <tr>
+                <th class="ps-4 py-3 text-uppercase fs-xs fw-bold text-secondary">ID</th>
+                <th class="py-3 text-uppercase fs-xs fw-bold text-secondary">Product Name</th>
+                <th class="py-3 text-uppercase fs-xs fw-bold text-secondary">Product Price</th>
+                <th class="py-3 text-uppercase fs-xs fw-bold text-secondary">Product Quantity</th>
+                <th class="py-3 text-uppercase fs-xs fw-bold text-secondary">Product Quality</th>
+                <!-- <th class="pe-4 py-3 text-uppercase fs-xs fw-bold text-secondary text-end">Actions</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              @for (data of paginatedUsers(); track data.id) {
+              <tr class="align-middle">
+                <td class="ps-4 fw-medium text-primary">#{{ data.id }}</td>
+                <td class="fw-bold text-dark">{{ data.name }}</td>
+                <td>
+                  <span class="badge border border-danger-subtle text-danger bg-danger-subtle px-2 py-1 font-monospace">
+                    {{ data.price }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">
+                    {{ data.quantity }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">
+                    {{ data.quality }}
+                  </span>
+                </td>
+                <!-- <td class="pe-4 text-end">
+                  <button 
+                    class="btn btn-outline-danger btn-sm border-0" 
+                    title="Delete User"
+                    (click)="onDeleteUser(data.id)">
+                    <i class="bi bi-trash3-fill"></i> Delete
+                  </button>
+                </td> -->
+              </tr>
+              } @empty {
+              <tr>
+                <td colspan="5" class="text-center py-5 bg-white text-muted">No users found.</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card-footer bg-white border-top py-3">
+      </div>
+    </div>
+  </div>
+</div>
