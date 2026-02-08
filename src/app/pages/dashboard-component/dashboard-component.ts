@@ -90,4 +90,41 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  // Inside your component class
+
+onClearDatabase() {
+  if (confirm('Are you sure you want to delete all records from the database?')) {
+    this.service.onClearDatabase().subscribe({
+      next: (response) => {
+        console.log('Database cleared');
+        
+        // Reset the UI
+       // fileInput.value = ''; 
+        this.selectedFile = null;
+        
+        // Refresh the table data (assuming you have this method)
+        this.getFileData(); 
+        
+        alert('Database cleared successfully!');
+      },
+      error: (err) => {
+        console.error('Error clearing database', err);
+      }
+    });
+  }
+}
+
+// Updated Upload function to handle the file reset properly
+// onUpload(fileInput: HTMLInputElement) {
+//   if (this.selectedFile) {
+//     this.fileService.upload(this.selectedFile).subscribe({
+//       next: () => {
+//         fileInput.value = ''; // Clears the "screenshot.png" text
+//         this.selectedFile = null; // Disables the button
+//         this.getFileData(); // Refresh table
+//       }
+//     });
+//   }
+// }
+
 }

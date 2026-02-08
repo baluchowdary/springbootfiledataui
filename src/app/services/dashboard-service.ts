@@ -23,5 +23,11 @@ export class DashboardService {
       responseType: 'text' // Adjust response type if needed
     });
   }
+
+  onClearDatabase() {
+    return this.http.delete(DASHBOARD_CONSTANTS.API_URL + DASHBOARD_CONSTANTS.CLEAR_DATABASE, {
+      responseType: 'text' // Adjust response type if needed
+    });
+  }
   
 }

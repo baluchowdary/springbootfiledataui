@@ -1,10 +1,16 @@
 <div class="container">
 
-  <div class="upload-container">
+  <div class="upload-container d-flex align-items-center">
     <input type="file" (change)="onFileSelected($event)" class="form-control-sm" id="fileInput">
     <button class="btn btn-primary btn-sm ms-2" [disabled]="!selectedFile" (click)="onUpload()">
       Upload File
     </button>
+
+    <button 
+    class="btn btn-danger btn-sm ms-auto" 
+    (click)="onClearDatabase()">
+    Clear Database
+  </button>
   </div>
 
   <div class="container-fluid min-vh-100 py-5" style="background-color: #f8f9fa;">
