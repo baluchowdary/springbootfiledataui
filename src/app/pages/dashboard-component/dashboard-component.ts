@@ -11,11 +11,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './dashboard-component.css',
 })
 export class DashboardComponent implements OnInit {
-  onDeleteUser(arg0: number) {
-    throw new Error('Method not implemented.');
-  }
+  //onDeleteUser(arg0: number) { }
 
   fileData = signal<Interfacedashboard[]>([]);
+
+  selectedFile: File | null = null;
+  products: any[] = []; // This should hold your table data
 
   // 2. Pagination State (Signals are better here for reactivity)
   currentPage = signal(1);
@@ -33,7 +34,6 @@ export class DashboardComponent implements OnInit {
     const end = start + this.pageSize();
     return this.fileData().slice(start, end);
   });
-  // by: any;
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages()) {
@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
       this.getFileData();
     }, 5000);
 
-   }
+  }
 
 
   ngOnInit(): void {
@@ -64,5 +64,30 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  // Capture the file from the input change event
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0] ?? null;
+  }
+
+  // Handle the upload button click
+  onUpload(): void {
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+
+      this.service.uploadFile(formData).subscribe({
+        next: (response) => {
+          console.log('Upload successful', response);
+          alert('File uploaded successfully!');
+          this.getFileData(); // Refresh the table after upload
+          this.selectedFile = null; // Reset input
+        },
+        error: (err) => {
+          console.error('Upload failed', err);
+          alert('Failed to upload file.');
+        }
+      });
+    }
+  }
 
 }
